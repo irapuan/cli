@@ -76,6 +76,10 @@ function outputUIExtensionsURLs(extensions: UIExtension[], storeFqdn: string, ur
         message = productSubscriptionMessage(url, extension).value
         break
       }
+      case 'fulfillmentcard_timeline': {
+        message = productSubscriptionMessage(url, extension).value
+        break
+      }
       default:
         continue
     }

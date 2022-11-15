@@ -80,7 +80,12 @@ export const publicUIExtensions = {
 } as const
 
 export const uiExtensions = {
-  types: [...publicUIExtensions.types, 'pos_ui_extension', 'customer_accounts_ui_extension'],
+  types: [
+    ...publicUIExtensions.types,
+    'pos_ui_extension',
+    'customer_accounts_ui_extension',
+    'fulfillmentcard_timeline',
+  ],
 } as const
 
 export const activeUIExtensions = {
@@ -143,6 +148,7 @@ export function extensionTypeIsGated(extensionType: ExtensionTypes): extensionTy
 export function getUIExtensionRendererDependency(extensionType: UIExtensionTypes): DependencyVersion | undefined {
   switch (extensionType) {
     case 'product_subscription':
+    case 'fulfillmentcard_timeline':
       return {name: '@shopify/admin-ui-extensions-react', version: '^1.0.1'}
     case 'checkout_ui_extension':
       return {name: '@shopify/checkout-ui-extensions-react', version: '^0.20.0'}
@@ -215,6 +221,7 @@ export const extensionTypesGroups: {name: string; extensions: ExtensionTypes[]}[
       'delivery_customization',
       'pos_ui_extension',
       'shipping_rate_presenter',
+      'fulfillmentcard_timeline',
     ],
   },
 ]
@@ -278,6 +285,8 @@ export function getExtensionOutputConfig(extensionType: ExtensionTypes): Extensi
       return buildExtensionOutputConfig('Delivery option presenter')
     case 'delivery_customization':
       return buildExtensionOutputConfig('Delivery customization')
+    case 'fulfillmentcard_timeline':
+      return buildExtensionOutputConfig('Fulfillment Card Timeline')
     default:
       return buildExtensionOutputConfig('Other')
   }
@@ -305,6 +314,8 @@ export const extensionGraphqlId = (type: ExtensionTypes) => {
       return 'WEB_PIXEL_EXTENSION'
     case 'customer_accounts_ui_extension':
       return 'CUSTOMER_ACCOUNTS_UI_EXTENSION'
+    case 'fulfillmentcard_timeline':
+      return 'FULFILLMENTCARD_TIMELINE'
     default:
       // As we add new extensions, this bug will force us to add a new case here.
       return type.toUpperCase()

@@ -32,6 +32,7 @@ export function getUIExtensionSurface(uiExtensionType: UIExtensionTypes) {
     case 'pos_ui_extension':
       return 'pos'
     case 'product_subscription':
+    case 'fulfillmentcard_timeline':
       return 'admin'
     case 'web_pixel_extension':
       // This value is mandatory but is not yet defined for web_pixel
